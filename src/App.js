@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import LandingPage from "./pages/LandingPage";
+import FacultySetup from "./pages/FacultySetup";
+import AddSection from "./pages/AddSection";
+import Sections from "./pages/Sections";
+import SectionProgress from "./pages/SectionProgress";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* Front / Demo page */}
+        <Route path="/" element={<LandingPage />} />
+
+        {/* Faculty setup (name, subject etc.) */}
+        <Route path="/setup" element={<FacultySetup />} />
+
+        {/* Add teaching section */}
+        <Route path="/add" element={<AddSection />} />
+
+        {/* List of all sections */}
+        <Route path="/sections" element={<Sections />} />
+
+        {/* Section progress */}
+        <Route path="/section/:id" element={<SectionProgress />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
