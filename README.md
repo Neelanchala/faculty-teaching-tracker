@@ -40,14 +40,30 @@ Everything in **one place**, without complexity.
 
 ---
 
-## 🖥️ Screenshots
+## 📸 Screenshots
 
-> (Add screenshots here)
+### Landing Page
+![Landing Page](screenshots/landing.png)
 
-- Landing Page  
-- Teaching Dashboard  
-- Add Section Form  
-- Section Progress View  
+---
+
+### Teaching Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+---
+
+### Add Teaching Section
+![Add Section](screenshots/add-section.png)
+
+---
+
+### Syllabus Progress Tracking
+![Progress](screenshots/progress.png)
+
+---
+
+### Syllabus Progress Tracking
+![Progress](screenshots/progress.png)
 
 ---
 
