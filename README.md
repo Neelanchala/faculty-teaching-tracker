@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# Faculty Teaching Tracker 📊
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A smart web dashboard designed to help faculty track **teaching sections, syllabus coverage, and progress** in a clean and efficient way.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚩 Problem Statement
 
-### `npm start`
+Faculty members often manage **multiple sections**, **different subjects**, and **day-wise schedules**, but lack a simple digital system to:
+- Track syllabus coverage
+- Monitor teaching progress
+- Organize sections by weekdays
+- Get a quick overview of completed vs pending topics
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This leads to **manual tracking**, **missed planning**, and **no real-time visibility**.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## ✅ Solution
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Faculty Teaching Tracker** provides:
+- 📅 Day-wise section organization (Monday–Saturday)
+- 📚 Syllabus topic tracking with progress percentage
+- 📊 Dashboard overview (sections, topics, completion, progress)
+- 🧩 Clean UI for quick updates and monitoring
 
-### `npm run build`
+Everything in **one place**, without complexity.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## ✨ Key Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Landing page with clear project intent
+- Teaching dashboard with statistics
+- Add teaching sections easily
+- Weekly filter tabs (Mon–Sat)
+- Syllabus checklist with progress calculation
+- Persistent data using browser storage
+- Responsive and clean UI
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🖥️ Screenshots
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> (Add screenshots here)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Landing Page  
+- Teaching Dashboard  
+- Add Section Form  
+- Section Progress View  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🛠️ Tech Stack
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- React.js
+- React Router
+- JavaScript
+- HTML5 & CSS3
+- LocalStorage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🚀 How to Run Locally
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+git clone https://github.com/Neelanchala/faculty-teaching-tracker.git
+cd faculty-teaching-tracker
+npm install
+npm start
