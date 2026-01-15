@@ -1,86 +1,188 @@
-# Faculty Teaching Tracker 📊
-
-A smart web dashboard designed to help faculty track **teaching sections, syllabus coverage, and progress** in a clean and efficient way.
-
----
+# Faculty Teaching Tracker
 
 ## 🚩 Problem Statement
-
-Faculty members often manage **multiple sections**, **different subjects**, and **day-wise schedules**, but lack a simple digital system to:
-- Track syllabus coverage
-- Monitor teaching progress
-- Organize sections by weekdays
-- Get a quick overview of completed vs pending topics
-
-This leads to **manual tracking**, **missed planning**, and **no real-time visibility**.
+Educational institutions lack a centralized digital system for faculty to manage teaching sections, track syllabus completion, and monitor day-wise teaching progress. Existing manual or semi-digital methods are inefficient, fragmented, and fail to provide real-time visibility into teaching progress.
 
 ---
 
-## ✅ Solution
-
-**Faculty Teaching Tracker** provides:
-- 📅 Day-wise section organization (Monday–Saturday)
-- 📚 Syllabus topic tracking with progress percentage
-- 📊 Dashboard overview (sections, topics, completion, progress)
-- 🧩 Clean UI for quick updates and monitoring
-
-Everything in **one place**, without complexity.
+## 💡 Solution Overview
+Faculty Teaching Tracker is a web-based dashboard that allows faculty members to securely log in, manage teaching sections, track syllabus coverage topic-wise, and view overall teaching progress in real time. The platform replaces manual tracking with a structured, digital, and intuitive system.
 
 ---
 
-## ✨ Key Features
+## ❓ How is this different from existing solutions?
+- Most existing systems are **manual, spreadsheet-based, or fragmented**
+- No real-time progress tracking per topic
+- No faculty-centric dashboard
 
-- Landing page with clear project intent
-- Teaching dashboard with statistics
-- Add teaching sections easily
-- Weekly filter tabs (Mon–Sat)
-- Syllabus checklist with progress calculation
-- Persistent data using browser storage
+This solution:
+- Centralizes all teaching data in one place
+- Tracks syllabus completion live
+- Provides day-wise scheduling and insights
+- Uses secure Google authentication
+
+---
+
+## 🛠 How does it solve the problem?
+- Faculty log in using Google Sign-In
+- Teaching sections are stored centrally in Firestore
+- Syllabus topics can be marked completed in real time
+- Progress percentage is auto-calculated
+- Day-wise filtering improves planning and visibility
+
+---
+
+## ✨ Features
+- Google Authentication (Faculty Login)
+- Protected Routes (Only logged-in users can access data)
+- Add / View Teaching Sections
+- Day-wise section filtering (Monday–Saturday)
+- Topic-wise syllabus completion tracking
+- Automatic progress calculation
+- Real-time data storage using Firestore
 - Responsive and clean UI
 
 ---
 
-## 📸 Screenshots
+## 🔧 Google Technologies Used
+- **Firebase Authentication** – Google Sign-In
+- **Cloud Firestore** – Real-time NoSQL database
+- **Firebase Hosting** – Deployment of the web app
+- **Google Cloud Platform (via Firebase)**
+
+---
+
+## 🚀 MVP (Minimum Viable Product)
+The MVP demonstrates:
+- Secure faculty login
+- Section creation
+- Syllabus tracking
+- Progress visualization
+- Live cloud deployment
+
+---
+
+## 🌐 MVP Live Link
+👉 https://faculty-teaching-tracker-bc35d.web.app
+
+---
+
+## 📸 MVP Screenshots
+# Faculty Teaching Tracker
+
+## 🚩 Problem Statement
+Educational institutions lack a centralized digital system for faculty to manage teaching sections, track syllabus completion, and monitor day-wise teaching progress. Existing manual or semi-digital methods are inefficient, fragmented, and fail to provide real-time visibility into teaching progress.
+
+---
+
+## 💡 Solution Overview
+Faculty Teaching Tracker is a web-based dashboard that allows faculty members to securely log in, manage teaching sections, track syllabus coverage topic-wise, and view overall teaching progress in real time. The platform replaces manual tracking with a structured, digital, and intuitive system.
+
+---
+
+## ❓ How is this different from existing solutions?
+- Most existing systems are **manual, spreadsheet-based, or fragmented**
+- No real-time progress tracking per topic
+- No faculty-centric dashboard
+
+This solution:
+- Centralizes all teaching data in one place
+- Tracks syllabus completion live
+- Provides day-wise scheduling and insights
+- Uses secure Google authentication
+
+---
+
+## 🛠 How does it solve the problem?
+- Faculty log in using Google Sign-In
+- Teaching sections are stored centrally in Firestore
+- Syllabus topics can be marked completed in real time
+- Progress percentage is auto-calculated
+- Day-wise filtering improves planning and visibility
+
+---
+
+## ✨ Features
+- Google Authentication (Faculty Login)
+- Protected Routes (Only logged-in users can access data)
+- Add / View Teaching Sections
+- Day-wise section filtering (Monday–Saturday)
+- Topic-wise syllabus completion tracking
+- Automatic progress calculation
+- Real-time data storage using Firestore
+- Responsive and clean UI
+
+---
+
+## 🔧 Google Technologies Used
+- **Firebase Authentication** – Google Sign-In
+- **Cloud Firestore** – Real-time NoSQL database
+- **Firebase Hosting** – Deployment of the web app
+- **Google Cloud Platform (via Firebase)**
+
+---
+
+## 🚀 MVP (Minimum Viable Product)
+The MVP demonstrates:
+- Secure faculty login
+- Section creation
+- Syllabus tracking
+- Progress visualization
+- Live cloud deployment
+
+---
+
+## 🌐 MVP Live Link
+👉 https://faculty-teaching-tracker-bc35d.web.app
+
+---
+
+## 📸 MVP Screenshots
 
 ### Landing Page
 ![Landing Page](screenshots/landing.png)
 
----
+### Faculty Login
+![Faculty Login](screenshots/login.png)
 
 ### Teaching Dashboard
-![Dashboard](screenshots/dashboard.png)
-
----
+![Teaching Dashboard](screenshots/dashboard.png)
 
 ### Add Teaching Section
-![Add Section](screenshots/add-section.png)
-
----
+![Add Teaching Section](screenshots/add-section.png)
 
 ### Syllabus Progress Tracking
-![Progress](screenshots/progress.png)
+![Syllabus Progress Tracking](screenshots/progress.png)
 
 ---
 
-### Syllabus Progress Tracking
-![Progress](screenshots/progress.png)
-
----
-
-## 🛠️ Tech Stack
-
+## 🧑‍💻 Tech Stack
 - React.js
-- React Router
+- Firebase (Auth, Firestore, Hosting)
 - JavaScript
-- HTML5 & CSS3
-- LocalStorage
+- HTML/CSS
 
 ---
 
-## 🚀 How to Run Locally
-
+## 📌 How to Run Locally
 ```bash
-git clone https://github.com/Neelanchala/faculty-teaching-tracker.git
-cd faculty-teaching-tracker
+npm install
+npm start
+
+### Faculty Login
+![Faculty Login](screenshots/login.png)
+
+---
+
+## 🧑‍💻 Tech Stack
+- React.js
+- Firebase (Auth, Firestore, Hosting)
+- JavaScript
+- HTML/CSS
+
+---
+
+## 📌 How to Run Locally
+```bash
 npm install
 npm start
