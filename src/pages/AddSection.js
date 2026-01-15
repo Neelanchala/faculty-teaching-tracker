@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
+import { useAuth } from "../context/AuthContext";
 
 function AddSection() {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const [facultyName, setFacultyName] = useState("");
   const [subject, setSubject] = useState("");
@@ -10,8 +14,14 @@ function AddSection() {
   const [day, setDay] = useState("Monday");
   const [timeSlot, setTimeSlot] = useState("");
   const [syllabusInput, setSyllabusInput] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    if (!user) {
+      alert("You must be logged in");
+      return;
+    }
+
     if (!facultyName || !subject || !section || !timeSlot) {
       alert("Please fill all required fields");
       return;
@@ -22,24 +32,28 @@ function AddSection() {
       .map((t) => t.trim())
       .filter(Boolean);
 
-    const newSection = {
-      id: Date.now(),
-      facultyName,
-      subject,
-      section,
-      day,
-      timeSlot,
-      syllabus: syllabusArray,
-      completedTopics: []
-    };
+    setLoading(true);
 
-    const existing = JSON.parse(localStorage.getItem("sections")) || [];
-    localStorage.setItem(
-      "sections",
-      JSON.stringify([...existing, newSection])
-    );
+    try {
+      await addDoc(collection(db, "sections"), {
+        uid: user.uid,
+        facultyName,
+        subject,
+        section,
+        day,
+        timeSlot,
+        syllabus: syllabusArray,
+        completedTopics: [],
+        createdAt: serverTimestamp()
+      });
 
-    navigate("/sections");
+      navigate("/sections");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to save section");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -95,14 +109,19 @@ function AddSection() {
           onChange={(e) => setSyllabusInput(e.target.value)}
         />
 
-        <button style={styles.button} onClick={handleSave}>
-          Save Section
+        <button
+          style={styles.button}
+          onClick={handleSave}
+          disabled={loading}
+        >
+          {loading ? "Saving..." : "Save Section"}
         </button>
       </div>
     </div>
   );
 }
 
+/* ✅ THIS WAS MISSING — NOW FIXED */
 const styles = {
   page: {
     minHeight: "100vh",

@@ -1,47 +1,91 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { useAuth } from "../context/AuthContext";
 
 function SectionProgress() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
+
   const [section, setSection] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const sections = JSON.parse(localStorage.getItem("sections")) || [];
-    const found = sections.find((s) => s.id.toString() === id);
-    setSection(found || null);
-  }, [id]);
+    if (!user) return;
+
+    const fetchSection = async () => {
+      try {
+        const ref = doc(db, "sections", id);
+        const snap = await getDoc(ref);
+
+        if (!snap.exists()) {
+          setSection(null);
+          setLoading(false);
+          return;
+        }
+
+        const data = snap.data();
+
+        // 🔒 Security: ensure owner
+        if (data.uid !== user.uid) {
+          navigate("/sections");
+          return;
+        }
+
+        setSection({
+          id: snap.id,
+          ...data,
+          syllabus: data.syllabus || [],
+          completedTopics: data.completedTopics || []
+        });
+
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
+      }
+    };
+
+    fetchSection();
+  }, [id, user, navigate]);
+
+  if (loading) {
+    return <div style={{ padding: 40 }}>Loading...</div>;
+  }
 
   if (!section) {
     return (
       <div style={{ padding: 40 }}>
-        <h2>No section selected</h2>
+        <h2>No section found</h2>
         <button onClick={() => navigate("/sections")}>
-          Go to Sections
+          Back to Sections
         </button>
       </div>
     );
   }
 
-  const toggleTopic = (topic) => {
-    const updatedCompleted = section.completedTopics.includes(topic)
-      ? section.completedTopics.filter((t) => t !== topic)
+  /* ---------- TOGGLE TOPIC ---------- */
+  const toggleTopic = async (topic) => {
+    const completed = section.completedTopics.includes(topic)
+      ? section.completedTopics.filter(t => t !== topic)
       : [...section.completedTopics, topic];
 
-    const updatedSection = { ...section, completedTopics: updatedCompleted };
+    await updateDoc(doc(db, "sections", section.id), {
+      completedTopics: completed
+    });
 
-    const sections = JSON.parse(localStorage.getItem("sections")) || [];
-    const updatedSections = sections.map((s) =>
-      s.id === section.id ? updatedSection : s
-    );
-
-    localStorage.setItem("sections", JSON.stringify(updatedSections));
-    setSection(updatedSection);
+    setSection({
+      ...section,
+      completedTopics: completed
+    });
   };
 
   const total = section.syllabus.length;
-  const completed = section.completedTopics.length;
-  const progress = total === 0 ? 0 : Math.round((completed / total) * 100);
+  const done = section.completedTopics.length;
+  const progress =
+    total === 0 ? 0 : Math.round((done / total) * 100);
 
   return (
     <div style={styles.page}>
@@ -74,7 +118,7 @@ function SectionProgress() {
 
         {/* Checklist */}
         <div style={{ marginTop: 20 }}>
-          {section.syllabus.map((topic) => (
+          {section.syllabus.map(topic => (
             <label key={topic} style={styles.topic}>
               <input
                 type="checkbox"

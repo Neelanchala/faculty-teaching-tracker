@@ -1,33 +1,44 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage";
-import FacultySetup from "./pages/FacultySetup";
-import AddSection from "./pages/AddSection";
+import Login from "./pages/Login";
 import Sections from "./pages/Sections";
+import AddSection from "./pages/AddSection";
 import SectionProgress from "./pages/SectionProgress";
+import ProtectedRoute from "./components/ProtectedRoute";
 
-function App() {
+export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Front / Demo page */}
-        <Route path="/" element={<LandingPage />} />
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<Login />} />
 
-        {/* Faculty setup (name, subject etc.) */}
-        <Route path="/setup" element={<FacultySetup />} />
+      <Route
+        path="/sections"
+        element={
+          <ProtectedRoute>
+            <Sections />
+          </ProtectedRoute>
+        }
+      />
 
-        {/* Add teaching section */}
-        <Route path="/add" element={<AddSection />} />
+      <Route
+        path="/add"
+        element={
+          <ProtectedRoute>
+            <AddSection />
+          </ProtectedRoute>
+        }
+      />
 
-        {/* List of all sections */}
-        <Route path="/sections" element={<Sections />} />
-
-        {/* Section progress */}
-        <Route path="/section/:id" element={<SectionProgress />} />
-      </Routes>
-    </BrowserRouter>
+      <Route
+        path="/section/:id"
+        element={
+          <ProtectedRoute>
+            <SectionProgress />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 }
-
-export default App;

@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  collection,
+  query,
+  where,
+  getDocs
+} from "firebase/firestore";
+import { db } from "../firebase";
+import { useAuth } from "../context/AuthContext";
 
 const DAYS = [
   "All",
@@ -11,22 +19,47 @@ const DAYS = [
   "Saturday"
 ];
 
-
 function Sections() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
   const [sections, setSections] = useState([]);
   const [activeDay, setActiveDay] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("sections")) || [];
-    setSections(stored);
-  }, []);
+    if (!user) return;
+
+    const fetchSections = async () => {
+      const q = query(
+        collection(db, "sections"),
+        where("uid", "==", user.uid)
+      );
+
+      const snapshot = await getDocs(q);
+      const data = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+
+      setSections(data);
+      setLoading(false);
+    };
+
+    fetchSections();
+  }, [user]);
+
+  if (loading) {
+    return <div style={{ padding: 40 }}>Loading...</div>;
+  }
 
   if (sections.length === 0) {
     return (
       <div style={{ padding: 40 }}>
         <h2>No sections added yet</h2>
-        <button onClick={() => navigate("/add")}>Add Section</button>
+        <button onClick={() => navigate("/add")}>
+          Add Section
+        </button>
       </div>
     );
   }
@@ -41,6 +74,7 @@ function Sections() {
     (sum, s) => sum + s.completedTopics.length,
     0
   );
+
   const overallProgress =
     totalTopics === 0
       ? 0
@@ -50,7 +84,7 @@ function Sections() {
   const filteredSections =
     activeDay === "All"
       ? sections
-      : sections.filter((s) => s.day === activeDay);
+      : sections.filter(s => s.day === activeDay);
 
   return (
     <div style={styles.page}>
@@ -66,7 +100,7 @@ function Sections() {
 
       {/* WEEK FILTER */}
       <div style={styles.tabs}>
-        {DAYS.map((day) => (
+        {DAYS.map(day => (
           <button
             key={day}
             onClick={() => setActiveDay(day)}
@@ -84,7 +118,7 @@ function Sections() {
 
       {/* SECTIONS LIST */}
       <div style={{ marginTop: 20 }}>
-        {filteredSections.map((sec) => (
+        {filteredSections.map(sec => (
           <div
             key={sec.id}
             style={styles.card}
@@ -100,7 +134,10 @@ function Sections() {
         ))}
       </div>
 
-      <button style={styles.addBtn} onClick={() => navigate("/add")}>
+      <button
+        style={styles.addBtn}
+        onClick={() => navigate("/add")}
+      >
         + Add New Section
       </button>
     </div>
